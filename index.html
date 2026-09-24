@@ -1,0 +1,2121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+            name="description"
+            content="Professional software engineer portfolio showcasing skills, projects, case studies, credentials, and achievements."
+    >
+
+    <title>Your Name | Software Engineer Portfolio</title>
+
+    <style>
+        /* =========================
+           RESET & GLOBAL STYLES
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            background: #f8fafc;
+            color: #1e293b;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        section {
+            padding: 90px 0;
+            scroll-margin-top: 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            color: #0f172a;
+        }
+
+        .section-title p {
+            color: #64748b;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================== */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .nav-container {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #2563eb;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #334155;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #2563eb;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle {
+            border: none;
+            background: #eff6ff;
+            color: #2563eb;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            border: none;
+            background: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #1e293b;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            background:
+                    linear-gradient(
+                            135deg,
+                            #eff6ff 0%,
+                            #f8fafc 50%,
+                            #eef2ff 100%
+                    );
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text .small-title {
+            color: #2563eb;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            line-height: 1;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 span {
+            color: #2563eb;
+        }
+
+        .hero-text h3 {
+            font-size: 1.5rem;
+            color: #475569;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            max-width: 650px;
+            color: #64748b;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-weight: 700;
+            border: 2px solid #2563eb;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            color: #2563eb;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 18px;
+            color: #475569;
+        }
+
+        .social-links a:hover {
+            color: #2563eb;
+        }
+
+        /* Code window */
+
+        .code-window {
+            background: #0f172a;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 25px 25px 0 #dbeafe;
+            overflow: hidden;
+        }
+
+        .window-top {
+            display: flex;
+            gap: 7px;
+            margin-bottom: 20px;
+        }
+
+        .window-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #64748b;
+        }
+
+        .code {
+            color: #e2e8f0;
+            font-family: "Courier New", monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .code .keyword {
+            color: #c084fc;
+        }
+
+        .code .variable {
+            color: #38bdf8;
+        }
+
+        .code .string {
+            color: #86efac;
+        }
+
+        /* =========================
+           ABOUT
+        ========================== */
+
+        .about {
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        /* NEW IMAGE PLACEHOLDER */
+
+        .about-image {
+            width: 100%;
+            max-width: 350px;
+            margin: auto;
+        }
+
+        .about-image img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            display: block;
+            border-radius: 25px;
+            border: 5px solid white;
+            box-shadow: 20px 20px 0 #e0e7ff;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+
+        .about-text p {
+            color: #64748b;
+            margin-bottom: 18px;
+        }
+
+        .about-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .info-item {
+            padding: 15px;
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 8px;
+        }
+
+        .info-item strong {
+            display: block;
+            color: #0f172a;
+        }
+
+        .info-item span {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* =========================
+           SKILLS
+        ========================== */
+
+        .skills {
+            background: #f8fafc;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1);
+        }
+
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #dbeafe;
+            color: #2563eb;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .skill-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* =========================
+           PROJECTS
+        ========================== */
+
+        .projects {
+            background: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .project-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.1);
+        }
+
+        /* NEW PROJECT IMAGE PLACEHOLDER */
+
+        .project-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            background: #e2e8f0;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-number {
+            color: #2563eb;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .project-content h3 {
+            margin: 8px 0 12px;
+            color: #0f172a;
+        }
+
+        .project-content p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech {
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* =========================
+           CASE STUDIES
+        ========================== */
+
+        .case-studies {
+            background: #f8fafc;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .case-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .case-card h3 {
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+
+        .star-item {
+            margin-bottom: 18px;
+        }
+
+        .star-item strong {
+            color: #2563eb;
+        }
+
+        .star-item p {
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        /* =========================
+           CREDENTIALS
+        ========================== */
+
+        .credentials {
+            background: white;
+        }
+
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .credential-card {
+            padding: 30px;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            background: #f8fafc;
+        }
+
+        .credential-card h3 {
+            margin: 15px 0 8px;
+        }
+
+        .credential-card p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .credential-icon {
+            font-size: 2rem;
+        }
+
+        /* =========================
+           REFERENCES
+        ========================== */
+
+        .references {
+            background: #f8fafc;
+        }
+
+        .reference-box {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            border-left: 5px solid #2563eb;
+        }
+
+        .reference-box p {
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+
+        .reference-box strong {
+            color: #0f172a;
+        }
+
+        /* =========================
+           PRIVACY
+        ========================== */
+
+        .privacy {
+            background: #0f172a;
+            color: white;
+        }
+
+        .privacy-box {
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .privacy-box h2 {
+            margin-bottom: 20px;
+        }
+
+        .privacy-box p {
+            color: #cbd5e1;
+            margin-bottom: 15px;
+        }
+
+        .privacy-list {
+            text-align: left;
+            max-width: 600px;
+            margin: 25px auto;
+            color: #cbd5e1;
+        }
+
+        .privacy-list li {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           CONTACT
+        ========================== */
+
+        .contact {
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .contact-text h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-text p {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #dbeafe;
+            color: #2563eb;
+            border-radius: 10px;
+        }
+
+        .contact-item span {
+            color: #64748b;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: #020617;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px;
+            font-size: 0.9rem;
+        }
+
+        /* =========================
+           ANIMATIONS
+        ========================== */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           DARK MODE
+        ========================== */
+
+        body.dark-mode {
+            background: #020617;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .navbar {
+            background: rgba(2, 6, 23, 0.95);
+            border-bottom-color: #1e293b;
+        }
+
+        body.dark-mode .nav-links a {
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .nav-links a:hover,
+        body.dark-mode .nav-links a.active {
+            color: #60a5fa;
+        }
+
+        body.dark-mode .menu-toggle {
+            color: white;
+        }
+
+        body.dark-mode .hero {
+            background: #020617;
+        }
+
+        body.dark-mode .hero-text h1,
+        body.dark-mode .section-title h2,
+        body.dark-mode .about-text h3,
+        body.dark-mode .project-content h3,
+        body.dark-mode .case-card h3,
+        body.dark-mode .credential-card h3,
+        body.dark-mode .info-item strong,
+        body.dark-mode .contact-text h3 {
+            color: #f8fafc;
+        }
+
+        body.dark-mode .hero-text h3,
+        body.dark-mode .hero-text p,
+        body.dark-mode .section-title p,
+        body.dark-mode .about-text p,
+        body.dark-mode .skill-card p,
+        body.dark-mode .project-content p,
+        body.dark-mode .star-item p,
+        body.dark-mode .credential-card p,
+        body.dark-mode .contact-text p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .about,
+        body.dark-mode .projects,
+        body.dark-mode .credentials,
+        body.dark-mode .contact {
+            background: #020617;
+        }
+
+        body.dark-mode .skills,
+        body.dark-mode .case-studies,
+        body.dark-mode .references {
+            background: #0f172a;
+        }
+
+        body.dark-mode .skill-card,
+        body.dark-mode .project-card,
+        body.dark-mode .case-card,
+        body.dark-mode .credential-card,
+        body.dark-mode .reference-box,
+        body.dark-mode .info-item {
+            background: #0f172a;
+            border-color: #1e293b;
+        }
+
+        body.dark-mode .project-image {
+            background: #1e293b;
+        }
+
+        body.dark-mode .theme-toggle {
+            background: #1e293b;
+            color: #60a5fa;
+        }
+
+        /* =========================
+           RESPONSIVE DESIGN
+        ========================== */
+
+        @media (max-width: 900px) {
+
+            .hero-content,
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 130px;
+                padding-bottom: 80px;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-buttons,
+            .social-links {
+                justify-content: center;
+            }
+
+            .code-window {
+                max-width: 650px;
+                margin: auto;
+            }
+
+            .skills-grid,
+            .projects-grid,
+            .credentials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav-links.open {
+                max-height: 500px;
+                border-bottom: 1px solid #e2e8f0;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 15px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .skills-grid,
+            .projects-grid,
+            .credentials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-info {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 3.3rem;
+            }
+        }
+
+        body.dark-mode .nav-links {
+            background: #020617;
+        }
+
+        body.dark-mode .nav-links.open {
+            border-bottom-color: #1e293b;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAVIGATION
+========================== -->
+
+<header class="navbar">
+    <div class="container nav-container">
+
+        <a href="#home" class="logo">YN.</a>
+
+        <nav>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#case-studies">Case Studies</a></li>
+                <li><a href="#credentials">Credentials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-actions">
+            <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Toggle dark mode"
+            >
+                🌙
+            </button>
+
+            <button
+                    class="menu-toggle"
+                    id="menuToggle"
+                    aria-label="Open navigation menu"
+            >
+                ☰
+            </button>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<main>
+
+    <section class="hero" id="home">
+
+        <div class="container hero-content">
+
+            <div class="hero-text reveal">
+
+                <div class="small-title">
+                    Software Engineer Portfolio
+                </div>
+
+                <h1>
+                    Hi, I'm <span>Your Name</span>
+                </h1>
+
+                <h3>
+                    Software Engineer & Web Developer
+                </h3>
+
+                <p>
+                    I am an aspiring software engineer passionate about
+                    building reliable, user-friendly, and practical
+                    software solutions. I enjoy solving problems through
+                    programming, web development, and continuous learning.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#projects" class="btn btn-primary">
+                        View My Work
+                    </a>
+
+                    <a href="resume.pdf" class="btn btn-outline" download>
+                        Download Résumé
+                    </a>
+
+                </div>
+
+                <div class="social-links">
+
+                    <a href="#" target="_blank">
+                        LinkedIn
+                    </a>
+
+                    <a href="#" target="_blank">
+                        GitHub
+                    </a>
+
+                    <a href="mailto:your.email@example.com">
+                        Email
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="code-window reveal">
+
+                <div class="window-top">
+                    <span class="window-dot"></span>
+                    <span class="window-dot"></span>
+                    <span class="window-dot"></span>
+                </div>
+
+                <div class="code">
+                    <div>
+                        <span class="keyword">const</span>
+                        <span class="variable">developer</span> = {
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;name:
+                        <span class="string">"Your Name"</span>,
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;role:
+                        <span class="string">"Software Engineer"</span>,
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;skills: [
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="string">"HTML"</span>,
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="string">"CSS"</span>,
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="string">"JavaScript"</span>,
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="string">"Python"</span>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;]
+                    </div>
+
+                    <div>
+                        };
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT ME
+    ========================== -->
+
+    <section class="about" id="about">
+
+        <div class="container">
+
+            <div class="section-title reveal">
+                <h2>About Me</h2>
+                <p>Get to know me and my professional journey.</p>
+            </div>
+
+            <div class="about-grid">
+
+                <!-- IMAGE PLACEHOLDER -->
+
+                <div class="about-image reveal">
+
+                    <img
+                            src="images/profile.jpg"
+                            alt="Professional photo of Your Name"
+                    >
+
+                </div>
+
+
+                <div class="about-text reveal">
+
+                    <h3>
+                        Building solutions through technology.
+                    </h3>
+
+                    <p>
+                        I am a dedicated aspiring software engineer with
+                        an interest in software development, web
+                        technologies, database systems, and problem
+                        solving.
+                    </p>
+
+                    <p>
+                        My academic and project experiences have allowed
+                        me to develop technical skills while also
+                        strengthening my communication, teamwork,
+                        adaptability, and analytical thinking.
+                    </p>
+
+                    <p>
+                        I am continuously improving my skills and looking
+                        for opportunities where I can contribute to
+                        meaningful software projects while growing as a
+                        professional.
+                    </p>
+
+
+                    <div class="about-info">
+
+                        <div class="info-item">
+                            <strong>Education</strong>
+                            <span>
+                                    Bachelor of Science in Information
+                                    Technology
+                                </span>
+                        </div>
+
+                        <div class="info-item">
+                            <strong>Focus</strong>
+                            <span>
+                                    Software & Web Development
+                                </span>
+                        </div>
+
+                        <div class="info-item">
+                            <strong>Location</strong>
+                            <span>
+                                    Philippines
+                                </span>
+                        </div>
+
+                        <div class="info-item">
+                            <strong>Status</strong>
+                            <span>
+                                    Open to Opportunities
+                                </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SKILLS
+    ========================== -->
+
+    <section class="skills" id="skills">
+
+        <div class="container">
+
+            <div class="section-title reveal">
+                <h2>Technical Skills</h2>
+                <p>
+                    Technologies and professional competencies I am
+                    developing.
+                </p>
+            </div>
+
+
+            <div class="skills-grid">
+
+                <div class="skill-card reveal">
+
+                    <div class="skill-icon">
+                        &lt;/&gt;
+                    </div>
+
+                    <h3>Web Development</h3>
+
+                    <p>
+                        HTML, CSS, JavaScript, responsive design, and
+                        modern front-end development practices.
+                    </p>
+
+                </div>
+
+
+                <div class="skill-card reveal">
+
+                    <div class="skill-icon">
+                        DB
+                    </div>
+
+                    <h3>Database</h3>
+
+                    <p>
+                        Database design, SQL, data management, and
+                        basic relational database concepts.
+                    </p>
+
+                </div>
+
+
+                <div class="skill-card reveal">
+
+                    <div class="skill-icon">
+                        &lt;/&gt;
+                    </div>
+
+                    <h3>Programming</h3>
+
+                    <p>
+                        Python, JavaScript, object-oriented programming,
+                        problem solving, and algorithmic thinking.
+                    </p>
+
+                </div>
+
+
+                <div class="skill-card reveal">
+
+                    <div class="skill-icon">
+                        GIT
+                    </div>
+
+                    <h3>Version Control</h3>
+
+                    <p>
+                        Git, GitHub, project collaboration, branching,
+                        commits, and basic software development workflows.
+                    </p>
+
+                </div>
+
+
+                <div class="skill-card reveal">
+
+                    <div class="skill-icon">
+                        UI
+                    </div>
+
+                    <h3>UI/UX</h3>
+
+                    <p>
+                        User-centered design principles, responsive
+                        layouts, accessibility, and interface usability.
+                    </p>
+
+                </div>
+
+
+                <div class="skill-card reveal">
+
+                    <div class="skill-icon">
+                        TEAM
+                    </div>
+
+                    <h3>Professional Skills</h3>
+
+                    <p>
+                        Communication, teamwork, adaptability, time
+                        management, critical thinking, and collaboration.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROJECTS
+    ========================== -->
+
+    <section class="projects" id="projects">
+
+        <div class="container">
+
+            <div class="section-title reveal">
+                <h2>Selected Projects</h2>
+                <p>
+                    Academic and personal software development projects.
+                </p>
+            </div>
+
+
+            <div class="projects-grid">
+
+
+                <!-- PROJECT 1 -->
+
+                <article class="project-card reveal">
+
+                    <div class="project-image">
+
+                        <img
+                                src="images/project-1.jpg"
+                                alt="Screenshot of Student Management System"
+                        >
+
+                    </div>
+
+                    <div class="project-content">
+
+                        <div class="project-number">
+                            PROJECT 01
+                        </div>
+
+                        <h3>
+                            Student Management System
+                        </h3>
+
+                        <p>
+                            A system designed to manage student records,
+                            registration information, and academic data
+                            through a structured database.
+                        </p>
+
+                        <div class="tech-stack">
+
+                                <span class="tech">
+                                    HTML
+                                </span>
+
+                            <span class="tech">
+                                    CSS
+                                </span>
+
+                            <span class="tech">
+                                    JavaScript
+                                </span>
+
+                            <span class="tech">
+                                    MySQL
+                                </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJECT 2 -->
+
+                <article class="project-card reveal">
+
+                    <div class="project-image">
+
+                        <img
+                                src="images/project-2.jpg"
+                                alt="Screenshot of E-Commerce Website"
+                        >
+
+                    </div>
+
+                    <div class="project-content">
+
+                        <div class="project-number">
+                            PROJECT 02
+                        </div>
+
+                        <h3>
+                            E-Commerce Website
+                        </h3>
+
+                        <p>
+                            A responsive online store interface featuring
+                            product displays, navigation, shopping
+                            functionality, and a user-friendly layout.
+                        </p>
+
+                        <div class="tech-stack">
+
+                                <span class="tech">
+                                    HTML
+                                </span>
+
+                            <span class="tech">
+                                    CSS
+                                </span>
+
+                            <span class="tech">
+                                    JavaScript
+                                </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJECT 3 -->
+
+                <article class="project-card reveal">
+
+                    <div class="project-image">
+
+                        <img
+                                src="images/project-3.jpg"
+                                alt="Screenshot of Task Management Application"
+                        >
+
+                    </div>
+
+                    <div class="project-content">
+
+                        <div class="project-number">
+                            PROJECT 03
+                        </div>
+
+                        <h3>
+                            Task Management Application
+                        </h3>
+
+                        <p>
+                            A productivity application that allows users
+                            to create, organize, update, and track tasks
+                            through a simple interface.
+                        </p>
+
+                        <div class="tech-stack">
+
+                                <span class="tech">
+                                    JavaScript
+                                </span>
+
+                            <span class="tech">
+                                    HTML
+                                </span>
+
+                            <span class="tech">
+                                    CSS
+                                </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CASE STUDIES
+    ========================== -->
+
+    <section class="case-studies" id="case-studies">
+
+        <div class="container">
+
+            <div class="section-title reveal">
+
+                <h2>Case Studies</h2>
+
+                <p>
+                    Examples of problem solving and professional
+                    competencies using the STAR method.
+                </p>
+
+            </div>
+
+
+            <div class="case-grid">
+
+
+                <!-- CASE STUDY 1 -->
+
+                <article class="case-card reveal">
+
+                    <h3>
+                        Case Study 01 — System Development
+                    </h3>
+
+                    <div class="star-item">
+
+                        <strong>
+                            Situation
+                        </strong>
+
+                        <p>
+                            A project required a simple system for
+                            organizing and managing student information.
+                        </p>
+
+                    </div>
+
+
+                    <div class="star-item">
+
+                        <strong>
+                            Task
+                        </strong>
+
+                        <p>
+                            I was responsible for helping design and
+                            develop a functional system that could
+                            efficiently organize the required information.
+                        </p>
+
+                    </div>
+
+
+                    <div class="star-item">
+
+                        <strong>
+                            Action
+                        </strong>
+
+                        <p>
+                            I analyzed the requirements, designed the
+                            database structure, developed the interface,
+                            tested the system, and fixed identified
+                            issues.
+                        </p>
+
+                    </div>
+
+
+                    <div class="star-item">
+
+                        <strong>
+                            Result
+                        </strong>
+
+                        <p>
+                            The completed system provided a more organized
+                            way of managing information and demonstrated
+                            my ability to apply software development
+                            principles to a practical problem.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- CASE STUDY 2 -->
+
+                <article class="case-card reveal">
+
+                    <h3>
+                        Case Study 02 — Team Collaboration
+                    </h3>
+
+                    <div class="star-item">
+
+                        <strong>
+                            Situation
+                        </strong>
+
+                        <p>
+                            A group software project required several
+                            members to coordinate development tasks within
+                            a limited academic deadline.
+                        </p>
+
+                    </div>
+
+
+                    <div class="star-item">
+
+                        <strong>
+                            Task
+                        </strong>
+
+                        <p>
+                            I needed to complete my assigned development
+                            tasks while coordinating changes with other
+                            members of the team.
+                        </p>
+
+                    </div>
+
+
+                    <div class="star-item">
+
+                        <strong>
+                            Action
+                        </strong>
+
+                        <p>
+                            I communicated regularly with team members,
+                            divided tasks according to responsibilities,
+                            used version control, and helped troubleshoot
+                            integration issues.
+                        </p>
+
+                    </div>
+
+
+                    <div class="star-item">
+
+                        <strong>
+                            Result
+                        </strong>
+
+                        <p>
+                            The team was able to integrate the major
+                            components of the project and complete the
+                            required deliverables within the deadline.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CREDENTIALS
+    ========================== -->
+
+    <section class="credentials" id="credentials">
+
+        <div class="container">
+
+            <div class="section-title reveal">
+
+                <h2>
+                    Credentials & Certificates
+                </h2>
+
+                <p>
+                    Certifications, training, and professional
+                    development.
+                </p>
+
+            </div>
+
+
+            <div class="credentials-grid">
+
+
+                <div class="credential-card reveal">
+
+                    <div class="credential-icon">
+                        🎓
+                    </div>
+
+                    <h3>
+                        Academic Achievement
+                    </h3>
+
+                    <p>
+                        Relevant academic achievement, award, or
+                        recognition.
+                    </p>
+
+                </div>
+
+
+                <div class="credential-card reveal">
+
+                    <div class="credential-icon">
+                        📜
+                    </div>
+
+                    <h3>
+                        Web Development Certificate
+                    </h3>
+
+                    <p>
+                        Certificate or training related to web development
+                        and programming.
+                    </p>
+
+                </div>
+
+
+                <div class="credential-card reveal">
+
+                    <div class="credential-icon">
+                        🏆
+                    </div>
+
+                    <h3>
+                        Professional Recognition
+                    </h3>
+
+                    <p>
+                        Competition, organization, leadership, or
+                        professional recognition.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         REFERENCES
+    ========================== -->
+
+    <section class="references">
+
+        <div class="container">
+
+            <div class="section-title reveal">
+
+                <h2>
+                    References
+                </h2>
+
+                <p>
+                    Professional or academic references available upon
+                    request.
+                </p>
+
+            </div>
+
+
+            <div class="reference-box reveal">
+
+                <p>
+                    <strong>
+                        Reference information:
+                    </strong>
+                </p>
+
+                <p>
+                    References may be provided upon request, with the
+                    permission of the individuals involved.
+                </p>
+
+                <p>
+                    For privacy and security, personal contact details are
+                    not publicly displayed on this portfolio.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RA 10173 PRIVACY
+    ========================== -->
+
+    <section class="privacy">
+
+        <div class="container">
+
+            <div class="privacy-box reveal">
+
+                <h2>
+                    Privacy & RA 10173 Compliance
+                </h2>
+
+                <p>
+                    This portfolio follows responsible handling of
+                    personal information in accordance with the principles
+                    of the Philippine Data Privacy Act of 2012
+                    (RA 10173).
+                </p>
+
+                <ul class="privacy-list">
+
+                    <li>
+                        No government-issued identification numbers are
+                        displayed.
+                    </li>
+
+                    <li>
+                        No home address or other unnecessary sensitive
+                        personal information is publicly displayed.
+                    </li>
+
+                    <li>
+                        Confidential academic, organizational, or
+                        employer information is excluded.
+                    </li>
+
+                    <li>
+                        Reference information is only provided with the
+                        appropriate permission.
+                    </li>
+
+                    <li>
+                        Project materials are presented only when they can
+                        be shared appropriately.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================== -->
+
+    <section class="contact" id="contact">
+
+        <div class="container">
+
+            <div class="section-title reveal">
+
+                <h2>
+                    Contact Me
+                </h2>
+
+                <p>
+                    Let's connect and discuss opportunities.
+                </p>
+
+            </div>
+
+
+            <div class="contact-grid">
+
+                <div class="contact-text reveal">
+
+                    <h3>
+                        Let's work together.
+                    </h3>
+
+                    <p>
+                        I am interested in software development
+                        opportunities, internships, collaborations, and
+                        projects where I can apply and further develop my
+                        technical skills.
+                    </p>
+
+                    <a
+                            href="mailto:your.email@example.com"
+                            class="btn btn-primary"
+                    >
+                        Send Me an Email
+                    </a>
+
+                </div>
+
+
+                <div class="contact-details reveal">
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            ✉
+                        </div>
+
+                        <div>
+                            <strong>Email</strong>
+                            <span>
+                                    your.email@example.com
+                                </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            in
+                        </div>
+
+                        <div>
+                            <strong>LinkedIn</strong>
+                            <span>
+                                    linkedin.com/in/yourname
+                                </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            GH
+                        </div>
+
+                        <div>
+                            <strong>GitHub</strong>
+                            <span>
+                                    github.com/yourusername
+                                </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+
+    <p>
+        © <span id="year"></span> Your Name.
+        All rights reserved.
+    </p>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script>
+
+    /* =========================
+       MOBILE MENU
+    ========================== */
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+
+        navLinks.classList.toggle("open");
+
+    });
+
+
+    /* Close menu after clicking a link */
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            navLinks.classList.remove("open");
+
+        });
+
+    });
+
+
+    /* =========================
+       DARK MODE
+    ========================== */
+
+    const themeToggle =
+        document.getElementById("themeToggle");
+
+    const savedTheme =
+        localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+
+        document.body.classList.add("dark-mode");
+
+        themeToggle.textContent = "☀️";
+
+    }
+
+
+    themeToggle.addEventListener("click", () => {
+
+        document.body.classList.toggle("dark-mode");
+
+        const isDark =
+            document.body.classList.contains("dark-mode");
+
+        themeToggle.textContent =
+            isDark ? "☀️" : "🌙";
+
+        localStorage.setItem(
+            "theme",
+            isDark ? "dark" : "light"
+        );
+
+    });
+
+
+    /* =========================
+       CURRENT YEAR
+    ========================== */
+
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+
+    /* =========================
+       SCROLL REVEAL
+    ========================== */
+
+    const revealElements =
+        document.querySelectorAll(".reveal");
+
+    const revealObserver =
+        new IntersectionObserver(
+            (entries, observer) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("show");
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+
+    revealElements.forEach(element => {
+
+        revealObserver.observe(element);
+
+    });
+
+
+    /* =========================
+       ACTIVE NAVIGATION
+    ========================== */
+
+    const sections =
+        document.querySelectorAll("section[id]");
+
+    const navItems =
+        document.querySelectorAll(".nav-links a");
+
+
+    window.addEventListener("scroll", () => {
+
+        let currentSection = "";
+
+        sections.forEach(section => {
+
+            const sectionTop =
+                section.offsetTop - 120;
+
+            const sectionHeight =
+                section.offsetHeight;
+
+            if (
+                window.scrollY >= sectionTop &&
+                window.scrollY < sectionTop + sectionHeight
+            ) {
+
+                currentSection =
+                    section.getAttribute("id");
+
+            }
+
+        });
+
+
+        navItems.forEach(link => {
+
+            link.classList.remove("active");
+
+            if (
+                link.getAttribute("href") ===
+                "#" + currentSection
+            ) {
+
+                link.classList.add("active");
+
+            }
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
