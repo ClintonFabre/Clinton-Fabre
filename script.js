@@ -1,11 +1,11 @@
-/* =========================================
-   MOBILE MENU
-========================================= */
+/* =========================================================
+   MOBILE NAVIGATION
+========================================================= */
 
-const menuToggle = document.getElementById("menuToggle");
+const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 
-menuToggle.addEventListener("click", () => {
+menuBtn.addEventListener("click", function () {
 
     navLinks.classList.toggle("active");
 
@@ -14,11 +14,11 @@ menuToggle.addEventListener("click", () => {
 
 /* Close mobile menu after clicking a link */
 
-const navItems = document.querySelectorAll(".nav-links a");
+const links = document.querySelectorAll(".nav-links a");
 
-navItems.forEach((item) => {
+links.forEach(function (link) {
 
-    item.addEventListener("click", () => {
+    link.addEventListener("click", function () {
 
         navLinks.classList.remove("active");
 
@@ -27,79 +27,42 @@ navItems.forEach((item) => {
 });
 
 
-/* =========================================
-   DARK MODE
-========================================= */
+/* =========================================================
+   CURRENT YEAR
+========================================================= */
 
-const themeToggle = document.getElementById("themeToggle");
+document.getElementById("year").textContent =
+    new Date().getFullYear();
 
-themeToggle.addEventListener("click", () => {
 
-    document.body.classList.toggle("dark-mode");
+/* =========================================================
+   SCROLL ANIMATION
+========================================================= */
 
-    const darkMode =
-        document.body.classList.contains("dark-mode");
+const animatedElements =
+    document.querySelectorAll(
+        ".section-title, .profile-text, .stat, .project, .case-study, .credential, .reference-card, .privacy-card"
+    );
 
-    if (darkMode) {
 
-        themeToggle.textContent = "☀️";
+animatedElements.forEach(function (element) {
 
-        localStorage.setItem("theme", "dark");
-
-    } else {
-
-        themeToggle.textContent = "🌙";
-
-        localStorage.setItem("theme", "light");
-
-    }
+    element.classList.add("fade-in");
 
 });
 
 
-/* Load saved theme */
+const observer = new IntersectionObserver(
 
-const savedTheme = localStorage.getItem("theme");
+    function (entries) {
 
-if (savedTheme === "dark") {
-
-    document.body.classList.add("dark-mode");
-
-    themeToggle.textContent = "☀️";
-
-}
-
-
-/* =========================================
-   CURRENT YEAR
-========================================= */
-
-const year = document.getElementById("year");
-
-year.textContent = new Date().getFullYear();
-
-
-/* =========================================
-   SCROLL REVEAL ANIMATION
-========================================= */
-
-const revealElements =
-    document.querySelectorAll(
-        ".section, .project-card, .skill-card, .case-study, .credential-card"
-    );
-
-
-const revealObserver = new IntersectionObserver(
-
-    (entries) => {
-
-        entries.forEach((entry) => {
+        entries.forEach(function (entry) {
 
             if (entry.isIntersecting) {
 
-                entry.target.classList.add("active");
+                entry.target.classList.add("show");
 
-                revealObserver.unobserve(entry.target);
+                observer.unobserve(entry.target);
 
             }
 
@@ -108,69 +71,117 @@ const revealObserver = new IntersectionObserver(
     },
 
     {
-        threshold: 0.1
+        threshold: 0.12
     }
 
 );
 
 
-revealElements.forEach((element) => {
+animatedElements.forEach(function (element) {
 
-    element.classList.add("reveal");
-
-    revealObserver.observe(element);
+    observer.observe(element);
 
 });
 
 
-/* =========================================
-   ACTIVE NAVIGATION
-========================================= */
+/* =========================================================
+   PRINT RÉSUMÉ
+========================================================= */
 
-const sections =
-    document.querySelectorAll("section[id]");
+function printResume() {
 
-const links =
-    document.querySelectorAll(".nav-links a");
+    window.print();
+
+}
 
 
-window.addEventListener("scroll", () => {
+/* =========================================================
+   PROFILE CARD INTERACTION
+========================================================= */
 
-    let currentSection = "";
+const profileCard =
+    document.querySelector(".hero-image");
 
-    sections.forEach((section) => {
 
-        const sectionTop =
-            section.offsetTop - 150;
+if (profileCard) {
 
-        const sectionHeight =
-            section.offsetHeight;
+    profileCard.addEventListener(
+        "mousemove",
+        function (event) {
 
-        if (
-            window.scrollY >= sectionTop &&
-            window.scrollY < sectionTop + sectionHeight
-        ) {
+            if (window.innerWidth <= 900) {
+                return;
+            }
 
-            currentSection = section.getAttribute("id");
+            const rect =
+                profileCard.getBoundingClientRect();
+
+            const x =
+                (event.clientX - rect.left)
+                / rect.width;
+
+            const y =
+                (event.clientY - rect.top)
+                / rect.height;
+
+            const rotateY =
+                (x - 0.5) * 8;
+
+            const rotateX =
+                (y - 0.5) * -8;
+
+            profileCard.style.transform =
+                `perspective(1000px)
+                 rotateX(${rotateX}deg)
+                 rotateY(${rotateY}deg)
+                 translateY(-5px)`;
 
         }
+    );
 
-    });
 
+    profileCard.addEventListener(
+        "mouseleave",
+        function () {
 
-    links.forEach((link) => {
-
-        link.classList.remove("active");
-
-        if (
-            link.getAttribute("href") ===
-            `#${currentSection}`
-        ) {
-
-            link.classList.add("active");
+            profileCard.style.transform =
+                "perspective(1000px) rotateX(0deg) rotateY(0deg)";
 
         }
+    );
 
-    });
+}
+
+
+/* =========================================================
+   SMOOTH NAVIGATION
+========================================================= */
+
+document.querySelectorAll(
+    'a[href^="#"]'
+).forEach(function (anchor) {
+
+    anchor.addEventListener(
+        "click",
+        function (event) {
+
+            const target =
+                document.querySelector(
+                    this.getAttribute("href")
+                );
+
+            if (target) {
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        }
+    );
 
 });
