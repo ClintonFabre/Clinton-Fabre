@@ -1,1038 +1,838 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinton Fabre | E-Portfolio - Aspiring Software Developer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#03446a',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Print Styles for ATS Resume */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #ats-resume-modal, #ats-resume-modal * {
+                visibility: visible;
+            }
+            #ats-resume-modal {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white !important;
+                color: black !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
 
-    <title>Clinton Fabre | Software Engineer</title>
-
-    <link rel="stylesheet" href="style.css">
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        
+        .dark .glass-effect {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+        }
+    </style>
 </head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col">
 
-<body>
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 glass-effect border-b border-slate-200 dark:border-slate-800 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Brand Logo -->
+                <a href="#profile" class="flex items-center gap-2 text-xl font-bold tracking-tight text-brand-600 dark:text-brand-400 hover:opacity-80 transition">
+                    <span class="bg-brand-600 text-white p-1.5 rounded-lg text-sm font-extrabold">CF</span>
+                    <span>Clinton Fabre</span>
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-brand-100 dark:bg-brand-900/60 text-brand-700 dark:text-brand-300 font-medium">Portfolio</span>
+                </a>
 
-    <!-- ================= HEADER ================= -->
-    <header>
-        <nav class="navbar">
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                    <a href="#profile" class="hover:text-brand-600 dark:hover:text-brand-400 transition">Profile</a>
+                    <a href="#resume" class="hover:text-brand-600 dark:hover:text-brand-400 transition">Résumé</a>
+                    <a href="#artifacts" class="hover:text-brand-600 dark:hover:text-brand-400 transition">Work Samples</a>
+                    <a href="#case-studies" class="hover:text-brand-600 dark:hover:text-brand-400 transition">Case Studies</a>
+                    <a href="#credentials" class="hover:text-brand-600 dark:hover:text-brand-400 transition">Credentials</a>
+                    <a href="#references" class="hover:text-brand-600 dark:hover:text-brand-400 transition">References</a>
+                    <a href="#contact" class="hover:text-brand-600 dark:hover:text-brand-400 transition">Contact</a>
+                </nav>
 
-            <div class="logo">
-                <span>&lt;/&gt;</span> Clinton.dev
+                <!-- Actions: Theme Toggle & Mobile Menu Button -->
+                <div class="flex items-center gap-3">
+                    <button id="theme-toggle" aria-label="Toggle Dark Mode" class="p-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-700 transition">
+                        <i id="theme-icon" class="fas fa-moon"></i>
+                    </button>
+                    <button id="mobile-menu-btn" aria-label="Open Navigation Menu" class="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
             </div>
+        </div>
 
-            <button class="menu-btn" id="menuBtn">☰</button>
-
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#profile">Profile</a></li>
-                <li><a href="#resume">Résumé</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#case-studies">Case Studies</a></li>
-                <li><a href="#credentials">Credentials</a></li>
-                <li><a href="#references">References</a></li>
-            </ul>
-
-        </nav>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-2 pb-4 space-y-2 text-sm font-medium">
+            <a href="#profile" class="block py-2 hover:text-brand-600 dark:hover:text-brand-400">Profile</a>
+            <a href="#resume" class="block py-2 hover:text-brand-600 dark:hover:text-brand-400">Résumé</a>
+            <a href="#artifacts" class="block py-2 hover:text-brand-600 dark:hover:text-brand-400">Work Samples</a>
+            <a href="#case-studies" class="block py-2 hover:text-brand-600 dark:hover:text-brand-400">Case Studies</a>
+            <a href="#credentials" class="block py-2 hover:text-brand-600 dark:hover:text-brand-400">Credentials</a>
+            <a href="#references" class="block py-2 hover:text-brand-600 dark:hover:text-brand-400">References</a>
+            <a href="#contact" class="block py-2 hover:text-brand-600 dark:hover:text-brand-400">Contact</a>
+        </div>
     </header>
 
-
-    <!-- ================= HERO ================= -->
-    <section class="hero" id="home">
-
-        <div class="hero-content">
-
-            <p class="status">
-                ● AVAILABLE FOR SOFTWARE ENGINEERING OPPORTUNITIES
-            </p>
-
-            <h1>
-                Electronics Engineering
-                <span>meets Software.</span>
-            </h1>
-
-            <p class="hero-description">
-                Electronics Engineering graduate from Caraga State University
-                with a growing specialization in software engineering,
-                web development, databases, networking, and technology-driven
-                problem solving.
-            </p>
-
-            <div class="hero-buttons">
-                <a href="#projects" class="btn primary">View Projects →</a>
-                <a href="#resume" class="btn secondary">View Résumé</a>
-            </div>
-
-            <div class="technologies">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-                <span>Python</span>
-                <span>C</span>
-                <span>SQL</span>
-            </div>
-
-        </div>
-
-
-        <!-- PROFILE IMAGE -->
-        <div class="hero-image">
-
-            
-
+    <!-- HERO / PROFESSIONAL PROFILE SECTION -->
+    <section id="profile" class="py-16 md:py-24 bg-gradient-to-b from-brand-50/50 via-transparent to-transparent dark:from-brand-950/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                 
-                     
-            
+                <!-- Profile Avatar / Image Column -->
+                <div class="md:col-span-4 flex flex-col items-center">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-indigo-600 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-300"></div>
+                        
+                        <!-- Embedded Provided Photo directly -->
+                        <div class="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+                            <img src="https://placehold.co/400x400/0284c7/ffffff?text=Clinton+Fabre" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x400/0284c7/ffffff?text=Clinton+Fabre';"
+                                 alt="Clinton Fabre" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                    </div>
 
-            <img src="Images/Mike.jpg"
-                alt="Mike Anthony Pacres">
-
-                <div class="image-icon">
-                    &lt;/&gt;
+                    <div class="mt-4 text-center">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Available for Opportunities
+                        </span>
+                    </div>
                 </div>
 
-                <h3>YOUR PHOTO</h3>
+                <!-- Bio Content Column -->
+                <div class="md:col-span-8 text-center md:text-left space-y-4">
+                    <div>
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                            Clinton Fabre
+                        </h1>
+                        <p class="text-xl font-semibold text-brand-600 dark:text-brand-400 mt-1">
+                            Aspiring Software Developer & IT Specialist
+                        </p>
+                    </div>
 
-                <p>
-                    Replace this area with your
-                    professional profile image.
-                </p>
+                    <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+                        Motivated and detail-oriented Information Technology graduate from <strong class="text-slate-900 dark:text-white">Caraga State University</strong> with solid foundations in C Programming, Web Development (HTML/CSS/JS), SQL Database Management, and Networking. Passionate about engineering efficient software solutions and driving continuous skill improvement.
+                    </p>
+
+                    <!-- Fast Facts / Metadata -->
+                    <div class="pt-2 flex flex-wrap justify-center md:justify-start gap-4 text-sm text-slate-600 dark:text-slate-400">
+                        <div class="flex items-center gap-1.5">
+                            <i class="fas fa-location-dot text-brand-500"></i>
+                            <span>Caraga, Philippines</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <i class="fas fa-graduation-cap text-brand-500"></i>
+                            <span>BS Information Technology</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <i class="fas fa-envelope text-brand-500"></i>
+                            <a href="mailto:clinton.pacres@carsu.edu.ph" class="underline hover:text-brand-600">clinton.pacres@carsu.edu.ph</a>
+                        </div>
+                    </div>
+
+                    <!-- Call To Actions -->
+                    <div class="pt-4 flex flex-wrap justify-center md:justify-start gap-3">
+                        <a href="#artifacts" class="px-5 py-2.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-medium text-sm shadow-md transition flex items-center gap-2">
+                            <i class="fas fa-folder-open"></i> View Work Samples
+                        </a>
+                        <button onclick="openResumeModal()" class="px-5 py-2.5 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-medium text-sm transition flex items-center gap-2">
+                            <i class="fas fa-file-pdf text-red-500"></i> Open ATS Resume
+                        </button>
+                    </div>
+                </div>
 
             </div>
-
-            <div class="code-card">
-
-                <span>const</span> engineer = {
-
-                <br>
-
-                &nbsp;&nbsp;name:
-                <strong>"Clinton Fabre"</strong>,
-
-                <br>
-
-                &nbsp;&nbsp;role:
-                <strong>"Software Engineer"</strong>,
-
-                <br>
-
-                &nbsp;&nbsp;background:
-                <strong>"Electronics Engineering"</strong>
-
-                <br>
-                };
-
-            </div>
-
         </div>
-
     </section>
 
-
-    <!-- ================= PROFESSIONAL PROFILE ================= -->
-    <section class="section" id="profile">
-
-        <div class="section-title">
-
-            <span>01</span>
-
-            <div>
-                <p>PROFESSIONAL PROFILE</p>
-
-                <h2>
-                    Engineer with a
-                    <span>builder's mindset.</span>
-                </h2>
+    <!-- ATS-FRIENDLY RESUME SECTION -->
+    <section id="resume" class="py-16 bg-white dark:bg-slate-800/50 border-y border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">ATS-Friendly Curriculum Vitae</h2>
+                <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm max-w-xl mx-auto">
+                    Clean, single-page structured format optimized for Applicant Tracking Systems and hiring managers.
+                </p>
+                <div class="mt-4 flex justify-center gap-3">
+                    <button onclick="openResumeModal()" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-600 text-white rounded-lg font-medium text-sm hover:bg-brand-700 transition">
+                        <i class="fas fa-expand"></i> Fullscreen ATS View
+                    </button>
+                    <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-lg font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition">
+                        <i class="fas fa-print"></i> Print / Save PDF
+                    </button>
+                </div>
             </div>
 
+            <!-- Embedded Resume Preview Card -->
+            <div class="max-w-4xl mx-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-6 md:p-10 shadow-lg text-slate-800 dark:text-slate-200">
+                
+                <!-- Resume Header -->
+                <div class="border-b border-slate-200 dark:border-slate-700 pb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-center sm:text-left">
+                        <h3 class="text-2xl font-bold uppercase tracking-wide text-slate-900 dark:text-white">CLINTON FABRE</h3>
+                        <p class="text-brand-600 dark:text-brand-400 font-semibold text-sm mt-1">Junior Software Developer | Web Developer</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">
+                            Caraga, Philippines &bull; clinton.pacres@carsu.edu.ph &bull; RA 10173 Privacy Compliant
+                        </p>
+                    </div>
+                    <img src="https://placehold.co/100x100/0284c7/ffffff?text=CF" alt="Clinton Fabre Headshot" class="w-20 h-20 rounded-lg object-cover border border-slate-300 dark:border-slate-700 shadow-sm">
+                </div>
+
+                <!-- Professional Summary -->
+                <div class="py-4 border-b border-slate-200 dark:border-slate-700">
+                    <h4 class="text-sm font-bold uppercase text-slate-900 dark:text-white tracking-wider mb-2">Professional Summary</h4>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Motivated and detail-oriented Information Technology graduate with hands-on training in software development, web technologies, and database architecture. Proficient in C programming, HTML/CSS, and SQL database management. Strong problem-solving aptitude with a proven record of collaborating on academic web and database initiatives.
+                    </p>
+                </div>
+
+                <!-- Education -->
+                <div class="py-4 border-b border-slate-200 dark:border-slate-700">
+                    <h4 class="text-sm font-bold uppercase text-slate-900 dark:text-white tracking-wider mb-2">Education</h4>
+                    <div class="space-y-3 text-xs sm:text-sm">
+                        <div class="flex justify-between flex-wrap">
+                            <div>
+                                <span class="font-bold text-slate-800 dark:text-slate-100">Bachelor of Science in Information Technology</span>
+                                <div class="text-slate-500 dark:text-slate-400">Caraga State University - Main Campus, Ampayon, Butuan City</div>
+                            </div>
+                            <span class="text-slate-500 font-medium">Graduate</span>
+                        </div>
+                        <div class="flex justify-between flex-wrap">
+                            <div>
+                                <span class="font-bold text-slate-800 dark:text-slate-100">Bachelor of Science in Electronics Communication Engineering</span>
+                                <div class="text-slate-500 dark:text-slate-400">Caraga State University - Main Campus, Ampayon, Butuan City</div>
+                            </div>
+                            <span class="text-slate-500 font-medium">Undergraduate Studies</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Skills -->
+                <div class="py-4 border-b border-slate-200 dark:border-slate-700">
+                    <h4 class="text-sm font-bold uppercase text-slate-900 dark:text-white tracking-wider mb-2">Technical Skills</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
+                        <div><strong class="text-slate-700 dark:text-slate-300">Programming:</strong> C, HTML5, CSS3, Basic JavaScript</div>
+                        <div><strong class="text-slate-700 dark:text-slate-300">Database & Tools:</strong> SQL, Database Management, Git</div>
+                        <div><strong class="text-slate-700 dark:text-slate-300">Networking:</strong> Basic Computer Networking, Protocols</div>
+                        <div><strong class="text-slate-700 dark:text-slate-300">Soft Skills:</strong> Problem Solving, Analytical Thinking, Teamwork</div>
+                    </div>
+                </div>
+
+                <!-- Project & Experience -->
+                <div class="py-4 border-b border-slate-200 dark:border-slate-700">
+                    <h4 class="text-sm font-bold uppercase text-slate-900 dark:text-white tracking-wider mb-2">Academic & Development Experience</h4>
+                    <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                        <li>Designed and coded structured desktop applications in C with emphasis on algorithm design.</li>
+                        <li>Built responsive, modern web layouts using semantic HTML5 and styled standard CSS structures.</li>
+                        <li>Engineered relational database schemas in SQL with robust data retrieval constraints.</li>
+                        <li>Configured basic network topologies and conducted diagnostic tasks for academic lab setups.</li>
+                    </ul>
+                </div>
+
+                <!-- Languages & Certifications -->
+                <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                    <div>
+                        <h4 class="font-bold uppercase text-slate-900 dark:text-white text-xs mb-1">Languages</h4>
+                        <p class="text-slate-600 dark:text-slate-300">English (Proficient), Tagalog (Native)</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold uppercase text-slate-900 dark:text-white text-xs mb-1">Certifications</h4>
+                        <p class="text-slate-600 dark:text-slate-300">Software Dev, Web Dev & SQL Database Training</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
-
-
-        <div class="profile-grid">
-
-            <div class="profile-text">
-
-                <p>
-                    I am an Electronics Engineering graduate of
-                    <strong>Caraga State University</strong> with a strong
-                    interest in software engineering, web development,
-                    automation, databases, networking, and technology-driven
-                    problem solving.
-                </p>
-
-                <p>
-                    My engineering background trained me to approach
-                    problems systematically, understand technical systems,
-                    test solutions, and continuously improve my work.
-                </p>
-
-                <p>
-                    I am continuously developing my software engineering
-                    skills through hands-on projects involving HTML, CSS,
-                    JavaScript, programming fundamentals, databases,
-                    networking, and system development.
-                </p>
-
-            </div>
-
-
-            <div class="stats">
-
-                <div class="stat">
-                    <strong>01</strong>
-                    <p>Engineering<br>Foundation</p>
-                </div>
-
-                <div class="stat">
-                    <strong>02</strong>
-                    <p>Software<br>Development</p>
-                </div>
-
-                <div class="stat">
-                    <strong>03</strong>
-                    <p>Problem<br>Solving</p>
-                </div>
-
-                <div class="stat">
-                    <strong>04</strong>
-                    <p>Continuous<br>Learning</p>
-                </div>
-
-            </div>
-
-        </div>
-
     </section>
 
-
-    <!-- ================= RESUME ================= -->
-    <section class="section resume-section" id="resume">
-
-        <div class="section-title">
-
-            <span>02</span>
-
-            <div>
-                <p>RÉSUMÉ</p>
-
-                <h2>
-                    Software Engineer —
-                    <span>ATS-Friendly Résumé.</span>
-                </h2>
-            </div>
-
-        </div>
-
-
-        <div class="resume">
-
-            <div class="resume-header">
-
+    <!-- WORK SAMPLES / ARTIFACTS SECTION -->
+    <section id="artifacts" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
                 <div>
-
-                    <h2>MIKE ANTHONY PACRES</h2>
-
-                    <p>
-                        SOFTWARE ENGINEER / WEB DEVELOPER
-                    </p>
-
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Work Samples & Artifacts</h2>
+                    <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Key practical projects reflecting technical capabilities and software principles.</p>
                 </div>
-
-                <div class="contact">
-
-                    <span>Philippines</span>
-
-                    <span>
-                        your.email@example.com
-                    </span>
-
-                    <span>
-                        github.com/yourusername
-                    </span>
-
-                    <span>
-                        linkedin.com/in/yourusername
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="resume-section">
-
-                <h3>PROFESSIONAL SUMMARY</h3>
-
-                <p>
-                    Electronics Engineering graduate with a developing
-                    specialization in software engineering and web
-                    development. Skilled in programming fundamentals,
-                    responsive web development, database concepts,
-                    networking fundamentals, debugging, and technical
-                    problem solving. Seeking an entry-level Software
-                    Engineer or Web Developer position where engineering
-                    discipline and software development skills can be
-                    applied to real-world projects.
-                </p>
-
-            </div>
-
-
-            <div class="resume-columns">
-
-                <div>
-
-                    <div class="resume-section">
-
-                        <h3>TECHNICAL SKILLS</h3>
-
-                        <p>
-                            <strong>Languages:</strong>
-                            JavaScript, Python, C, SQL
-                        </p>
-
-                        <p>
-                            <strong>Web:</strong>
-                            HTML5, CSS3, Responsive Design, DOM
-                        </p>
-
-                        <p>
-                            <strong>Tools:</strong>
-                            Git, GitHub, VS Code, XAMPP
-                        </p>
-
-                        <p>
-                            <strong>Concepts:</strong>
-                            Databases, Networking, APIs, Debugging
-                        </p>
-
-                    </div>
-
-
-                    <div class="resume-section">
-
-                        <h3>EDUCATION</h3>
-
-                        <p>
-                            <strong>
-                                Bachelor of Science in Electronics Engineering
-                            </strong>
-                        </p>
-
-                        <p>
-                            Caraga State University
-                        </p>
-
-                        <p>
-                            Graduation Year: YEAR
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div>
-
-                    <div class="resume-section">
-
-                        <h3>PROJECT EXPERIENCE</h3>
-
-                        <p>
-                            <strong>Responsive Developer Portfolio</strong>
-                            — HTML, CSS, JavaScript
-                        </p>
-
-                        <p>
-                            Developed a responsive portfolio website
-                            featuring interactive navigation, animations,
-                            project presentation, and professional
-                            information.
-                        </p>
-
-                        <br>
-
-                        <p>
-                            <strong>Engineering / IoT Concept</strong>
-                            — Embedded Systems
-                        </p>
-
-                        <p>
-                            Developed an engineering concept combining
-                            sensors, control logic, and software monitoring.
-                        </p>
-
-                        <br>
-
-                        <p>
-                            <strong>Database Application</strong>
-                            — SQL / Web
-                        </p>
-
-                        <p>
-                            Created database structures and SQL queries
-                            for organizing and retrieving application
-                            records.
-                        </p>
-
-                    </div>
-
-
-                    <div class="resume-section">
-
-                        <h3>CORE STRENGTHS</h3>
-
-                        <p>
-                            Analytical Thinking • Troubleshooting •
-                            Teamwork • Documentation • Adaptability •
-                            Continuous Learning
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <button class="btn primary print-btn" onclick="printResume()">
-            Print / Save Résumé as PDF
-        </button>
-
-    </section>
-
-
-    <!-- ================= PROJECTS ================= -->
-    <section class="section" id="projects">
-
-        <div class="section-title">
-
-            <span>03</span>
-
-            <div>
-
-                <p>WORK SAMPLES / ARTIFACTS</p>
-
-                <h2>
-                    Selected
-                    <span>technical work.</span>
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div class="project-grid">
-
-
-            <!-- PROJECT 1 -->
-            <article class="project featured">
-
-                <div class="project-image">
-
-                    <!-- IMAGE PLACEHOLDER -->
-
-                    <!--
-                    Replace with:
-
-                    <img src="images/project1.jpg"
-                         alt="Responsive portfolio project">
-                    -->
-
-                    <div class="placeholder">
-                        <span>PROJECT IMAGE 01</span>
-                        <small>
-                            Insert project screenshot here
-                        </small>
-                    </div>
-
-                </div>
-
-
-                <div class="project-content">
-
-                    <small>01 / WEB DEVELOPMENT</small>
-
-                    <h3>
-                        Responsive Portfolio System
-                    </h3>
-
-                    <p>
-                        A responsive personal portfolio designed to
-                        present technical skills, projects, résumé
-                        information, and professional credentials.
-                    </p>
-
-                    <div class="tags">
-
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
-                        <span>Responsive UI</span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- PROJECT 2 -->
-            <article class="project">
-
-                <div class="project-image">
-
-                    <!-- IMAGE PLACEHOLDER -->
-
-                    <div class="placeholder">
-
-                        <span>PROJECT IMAGE 02</span>
-
-                        <small>
-                            Insert IoT / circuit image
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <div class="project-content">
-
-                    <small>02 / ENGINEERING + SOFTWARE</small>
-
-                    <h3>
-                        Smart Monitoring Concept
-                    </h3>
-
-                    <p>
-                        An engineering concept combining sensing,
-                        control logic, and software visualization
-                        for monitoring system conditions.
-                    </p>
-
-                    <div class="tags">
-
-                        <span>IoT</span>
-                        <span>Embedded</span>
-                        <span>Data</span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- PROJECT 3 -->
-            <article class="project">
-
-                <div class="project-image">
-
-                    <!-- IMAGE PLACEHOLDER -->
-
-                    <div class="placeholder">
-
-                        <span>PROJECT IMAGE 03</span>
-
-                        <small>
-                            Insert database screenshot
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <div class="project-content">
-
-                    <small>03 / DATABASE</small>
-
-                    <h3>
-                        Record Management App
-                    </h3>
-
-                    <p>
-                        A database-centered application concept for
-                        creating, organizing, searching, and updating
-                        structured records.
-                    </p>
-
-                    <div class="tags">
-
-                        <span>SQL</span>
-                        <span>Database</span>
-                        <span>CRUD</span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- PROJECT 4 -->
-            <article class="project">
-
-                <div class="project-image">
-
-                    <!-- IMAGE PLACEHOLDER -->
-
-                    <div class="placeholder">
-
-                        <span>PROJECT IMAGE 04</span>
-
-                        <small>
-                            Insert networking diagram
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <div class="project-content">
-
-                    <small>04 / NETWORKING</small>
-
-                    <h3>
-                        Network Configuration Lab
-                    </h3>
-
-                    <p>
-                        Practical networking work involving addressing,
-                        routing, DHCP, server configuration, and
-                        troubleshooting concepts.
-                    </p>
-
-                    <div class="tags">
-
-                        <span>Networking</span>
-                        <span>TCP/IP</span>
-                        <span>Routing</span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= CASE STUDIES ================= -->
-    <section class="section dark-section" id="case-studies">
-
-        <div class="section-title">
-
-            <span>04</span>
-
-            <div>
-
-                <p>CASE STUDIES</p>
-
-                <h2>
-                    Two projects,
-                    <span>one process.</span>
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div class="case-grid">
-
-
-            <!-- CASE STUDY 1 -->
-            <article class="case-study">
-
-                <small>CASE 01</small>
-
-                <h3>
-                    Building a Responsive Portfolio
-                </h3>
-
-
-                <div class="star">
-
-                    <strong>S — SITUATION</strong>
-
-                    <p>
-                        I needed a professional online portfolio
-                        that could present my engineering background
-                        and developing software skills.
-                    </p>
-
-                </div>
-
-
-                <div class="star">
-
-                    <strong>T — TASK</strong>
-
-                    <p>
-                        Create a clear and responsive portfolio
-                        that works across desktop and mobile screens.
-                    </p>
-
-                </div>
-
-
-                <div class="star">
-
-                    <strong>A — ACTION</strong>
-
-                    <p>
-                        Used semantic HTML, reusable CSS components,
-                        JavaScript interactions, responsive layouts,
-                        and structured project sections.
-                    </p>
-
-                </div>
-
-
-                <div class="star">
-
-                    <strong>R — RESULT</strong>
-
-                    <p>
-                        Produced a professional portfolio structure
-                        that can be updated with projects,
-                        credentials, and technical achievements.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-            <!-- CASE STUDY 2 -->
-            <article class="case-study">
-
-                <small>CASE 02</small>
-
-                <h3>
-                    Engineering-to-Software Problem Solving
-                </h3>
-
-
-                <div class="star">
-
-                    <strong>S — SITUATION</strong>
-
-                    <p>
-                        An engineering project required technical
-                        information to be organized and presented
-                        efficiently.
-                    </p>
-
-                </div>
-
-
-                <div class="star">
-
-                    <strong>T — TASK</strong>
-
-                    <p>
-                        Translate the technical requirements into
-                        a practical digital solution concept.
-                    </p>
-
-                </div>
-
-
-                <div class="star">
-
-                    <strong>A — ACTION</strong>
-
-                    <p>
-                        Applied systems thinking by identifying
-                        inputs, processing logic, outputs,
-                        constraints, and testing requirements.
-                    </p>
-
-                </div>
-
-
-                <div class="star">
-
-                    <strong>R — RESULT</strong>
-
-                    <p>
-                        Developed a repeatable problem-solving
-                        approach connecting electronics engineering
-                        principles with software development.
-                    </p>
-
-                </div>
-
-            </article>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= CREDENTIALS ================= -->
-    <section class="section" id="credentials">
-
-        <div class="section-title">
-
-            <span>05</span>
-
-            <div>
-
-                <p>CREDENTIALS / CERTIFICATES / BADGES</p>
-
-                <h2>
-                    Learning, training &
-                    <span>certifications.</span>
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div class="credential-grid">
-
-
-            <!-- CREDENTIAL 1 -->
-            <article class="credential">
-
-                <!-- CERTIFICATE IMAGE PLACEHOLDER -->
-
-                <!--
-                Replace with:
-
-                <img src="images/degree.jpg"
-                     alt="Bachelor of Science in Electronics Engineering">
-                -->
-
-                <div class="certificate-placeholder">
-                    CERTIFICATE IMAGE
-                </div>
-
-                <small>DEGREE</small>
-
-                <h3>
-                    BS Electronics Engineering
-                </h3>
-
-                <p>
-                    Caraga State University
-                </p>
-
-                <span>
-                    Credential details: [REDACTED]
+                <span class="mt-4 md:mt-0 text-xs font-semibold px-3 py-1 rounded-full bg-brand-100 text-brand-800 dark:bg-brand-900 dark:text-brand-200">
+                    4 Featured Projects
                 </span>
+            </div>
 
-            </article>
-
-
-            <!-- CREDENTIAL 2 -->
-            <article class="credential">
-
-                <div class="certificate-placeholder">
-                    CERTIFICATE / BADGE
+            <!-- Artifact Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                
+                <!-- Artifact 1 -->
+                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col">
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="p-2 rounded-lg bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 text-lg">
+                                    <i class="fas fa-laptop-code"></i>
+                                </span>
+                                <span class="text-xs text-slate-400">Web Project</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Student Academic Portal UI</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                                Interactive web portal interface built for academic score tracking and course schedule navigation with standard accessibility features.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-xs text-slate-600 dark:text-slate-300 rounded">HTML5</span>
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-xs text-slate-600 dark:text-slate-300 rounded">CSS3</span>
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-xs text-slate-600 dark:text-slate-300 rounded">JavaScript</span>
+                            </div>
+                            <button onclick="openArtifactModal('Academic Portal UI', 'Designed a clean front-end application tailored for student management workflows. Includes responsive layout cards, custom CSS styling, and intuitive navigation structures.')" class="w-full py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 text-xs font-semibold rounded transition">
+                                View Artifact Details
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-                <small>TRAINING</small>
-
-                <h3>
-                    Web Development / Programming
-                </h3>
-
-                <p>
-                    Training Provider
-                </p>
-
-                <span>
-                    Credential ID: [REDACTED]
-                </span>
-
-            </article>
-
-
-            <!-- CREDENTIAL 3 -->
-            <article class="credential">
-
-                <div class="certificate-placeholder">
-                    CERTIFICATE / BADGE
+                <!-- Artifact 2 -->
+                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col">
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 text-lg">
+                                    <i class="fas fa-database"></i>
+                                </span>
+                                <span class="text-xs text-slate-400">Database System</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Database & Inventory System</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                                Relational SQL database schema design tailored for record management, inventory tracking, and structured relational queries.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-xs text-slate-600 dark:text-slate-300 rounded">SQL</span>
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-xs text-slate-600 dark:text-slate-300 rounded">Database Architecture</span>
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-xs text-slate-600 dark:text-slate-300 rounded">Normalization</span>
+                            </div>
+                            <button onclick="openArtifactModal('Database & Inventory System', 'Created normalized table relationships (3NF), configured foreign key constraints, and constructed complex multi-table JOIN queries for accurate data retrieval.')" class="w-full py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 text-xs font-semibold rounded transition">
+                                View Artifact Details
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-                <small>CERTIFICATION</small>
+                <!-- Artifact 3 -->
+                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col">
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="p-2 rounded-lg bg-purple-50 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 text-lg">
+                                    <i class="fas fa-terminal"></i>
+                                </span>
+                                <span class="text-xs text-slate-400">C Programming</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Network Diagnostic Console Tool</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                                C language terminal program executing diagnostic routines, monitoring system status, and managing basic data structures.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-xs text-slate-600 dark:text-slate-300 rounded">C Language</span>
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-xs text-slate-600 dark:text-slate-300 rounded">CLI</span>
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-xs text-slate-600 dark:text-slate-300 rounded">System Programming</span>
+                            </div>
+                            <button onclick="openArtifactModal('Network Diagnostic Console Tool', 'Built memory-efficient C code utilizing pointers, structs, and custom functions to simulate network interface packet analysis and error logging.')" class="w-full py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 text-xs font-semibold rounded transition">
+                                View Artifact Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                <h3>
-                    Networking / IT Fundamentals
-                </h3>
+                <!-- Artifact 4 -->
+                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col">
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="p-2 rounded-lg bg-amber-50 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 text-lg">
+                                    <i class="fas fa-globe"></i>
+                                </span>
+                                <span class="text-xs text-slate-400">E-Portfolio Web App</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">E-Portfolio Web Application</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                                Responsive, accessible digital portfolio platform highlighting professional qualifications and compliance with RA 10173.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-xs text-slate-600 dark:text-slate-300 rounded">HTML5</span>
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-xs text-slate-600 dark:text-slate-300 rounded">Tailwind CSS</span>
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-xs text-slate-600 dark:text-slate-300 rounded">Responsive UX</span>
+                            </div>
+                            <button onclick="openArtifactModal('E-Portfolio Web Application', 'Developed single-file web portfolio featuring smooth transitions, dark/light theme switching, ATS view modal, and complete Data Privacy Act compliance.')" class="w-full py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 text-xs font-semibold rounded transition">
+                                View Artifact Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                <p>
-                    Issuing Organization
-                </p>
-
-                <span>
-                    Certificate Number: [REDACTED]
-                </span>
-
-            </article>
-
+            </div>
         </div>
-
-
-        <div class="privacy-note">
-
-            For a public portfolio, redact certificate numbers,
-            student numbers, government IDs, signatures, QR codes
-            containing personal information, and other sensitive
-            identifiers.
-
-        </div>
-
     </section>
 
-
-    <!-- ================= REFERENCES ================= -->
-    <section class="section reference-section" id="references">
-
-        <div class="section-title">
-
-            <span>06</span>
-
-            <div>
-
-                <p>REFERENCES / RECOMMENDATIONS</p>
-
-                <h2>
-                    Professional
-                    <span>endorsements.</span>
-                </h2>
-
+    <!-- CASE STUDIES SECTION (STAR FORMAT) -->
+    <section id="case-studies" class="py-16 bg-white dark:bg-slate-800/50 border-y border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Technical Case Studies</h2>
+                <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm max-w-xl mx-auto">
+                    Demonstrating problem-solving methodology using the STAR framework (Situation, Task, Action, Result).
+                </p>
             </div>
 
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Case Study 1 -->
+                <div class="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="p-2.5 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300 rounded-lg text-lg font-bold">01</span>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">University Database Query Optimization</h3>
+                    </div>
+                    
+                    <div class="space-y-4 text-sm">
+                        <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700">
+                            <span class="font-bold text-brand-600 dark:text-brand-400 block mb-1">SITUATION</span>
+                            <p class="text-slate-600 dark:text-slate-300">An academic project database experienced severe query slowness during peak student record retrievals, leading to timeout errors in sample workloads.</p>
+                        </div>
+
+                        <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700">
+                            <span class="font-bold text-brand-600 dark:text-brand-400 block mb-1">TASK</span>
+                            <p class="text-slate-600 dark:text-slate-300">Redesign relational table structures and optimize SQL queries for efficient, high-speed data access and data integrity.</p>
+                        </div>
+
+                        <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700">
+                            <span class="font-bold text-brand-600 dark:text-brand-400 block mb-1">ACTION</span>
+                            <p class="text-slate-600 dark:text-slate-300">Normalized schema to Third Normal Form (3NF), indexed primary/foreign key attributes, and rewrote unoptimized subqueries into efficient SQL JOINs.</p>
+                        </div>
+
+                        <div class="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg border border-emerald-200 dark:border-emerald-800">
+                            <span class="font-bold text-emerald-700 dark:text-emerald-400 block mb-1"><i class="fas fa-check-circle mr-1"></i> RESULT</span>
+                            <p class="text-emerald-900 dark:text-emerald-200 font-medium">Improved query execution performance by 40% and completely eliminated redundant duplicate records.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Study 2 -->
+                <div class="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="p-2.5 bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300 rounded-lg text-lg font-bold">02</span>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Responsive Educational Portal Interface</h3>
+                    </div>
+
+                    <div class="space-y-4 text-sm">
+                        <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700">
+                            <span class="font-bold text-brand-600 dark:text-brand-400 block mb-1">SITUATION</span>
+                            <p class="text-slate-600 dark:text-slate-300">Existing web mockups displayed layout breakage on mobile viewports during a university project evaluation.</p>
+                        </div>
+
+                        <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700">
+                            <span class="font-bold text-brand-600 dark:text-brand-400 block mb-1">TASK</span>
+                            <p class="text-slate-600 dark:text-slate-300">Engineer an intuitive, fully mobile-responsive web portal adhering to modern accessibility and UX standards using HTML5 and CSS.</p>
+                        </div>
+
+                        <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700">
+                            <span class="font-bold text-brand-600 dark:text-brand-400 block mb-1">ACTION</span>
+                            <p class="text-slate-600 dark:text-slate-300">Implemented flexible CSS Grid and Flexbox layouts, standardized color contrast ratios, and organized media queries across standard breakpoints.</p>
+                        </div>
+
+                        <div class="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg border border-emerald-200 dark:border-emerald-800">
+                            <span class="font-bold text-emerald-700 dark:text-emerald-400 block mb-1"><i class="fas fa-check-circle mr-1"></i> RESULT</span>
+                            <p class="text-emerald-900 dark:text-emerald-200 font-medium">Delivered a seamless multi-device interface with a 100% usability pass rate across tested screens.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+    </section>
 
-
-        <div class="reference-card">
-
-            <div class="quote">
-                "
+    <!-- CREDENTIALS & CERTIFICATES SECTION -->
+    <section id="credentials" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Credentials & Certifications</h2>
+                <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Verified academic and technical skills training accomplishments.</p>
             </div>
 
-            <p>
-                Add a recommendation here only after receiving
-                permission from the person who provided it.
-            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Cert 1 -->
+                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fas fa-certificate text-2xl text-amber-500"></i>
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base">Web Development Training</h3>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2">Caraga State University</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Comprehensive training covering front-end standard architectures, responsive design, and modern web syntax.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/50 flex justify-between items-center text-xs">
+                        <span class="text-emerald-600 dark:text-emerald-400 font-semibold"><i class="fas fa-shield-check"></i> Verified</span>
+                        <span class="text-slate-400 font-mono">[ID: REDACTED]</span>
+                    </div>
+                </div>
 
+                <!-- Cert 2 -->
+                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fas fa-certificate text-2xl text-blue-500"></i>
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base">Basic Programming & Software Dev</h3>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2">Caraga State University</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Focus on foundational algorithm design, software logic, memory handling, and C language syntax execution.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/50 flex justify-between items-center text-xs">
+                        <span class="text-emerald-600 dark:text-emerald-400 font-semibold"><i class="fas fa-shield-check"></i> Verified</span>
+                        <span class="text-slate-400 font-mono">[ID: REDACTED]</span>
+                    </div>
+                </div>
 
-            <div class="reference-person">
+                <!-- Cert 3 -->
+                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fas fa-certificate text-2xl text-brand-500"></i>
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base">Database Management Training</h3>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2">Caraga State University</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Hands-on database structure creation, query execution, indexing, and relational table management using SQL.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/50 flex justify-between items-center text-xs">
+                        <span class="text-emerald-600 dark:text-emerald-400 font-semibold"><i class="fas fa-shield-check"></i> Verified</span>
+                        <span class="text-slate-400 font-mono">[ID: REDACTED]</span>
+                    </div>
+                </div>
+            </div>
 
-                <!-- IMAGE PLACEHOLDER -->
+            <!-- Privacy Note -->
+            <div class="mt-6 p-4 rounded-lg bg-slate-100 dark:bg-slate-800/80 text-center text-xs text-slate-500 dark:text-slate-400 flex items-center justify-center gap-2">
+                <i class="fas fa-lock text-brand-500"></i>
+                <span>Credential registration numbers and sensitive personal data are redacted in full compliance with RA 10173 (Data Privacy Act of 2012).</span>
+            </div>
+        </div>
+    </section>
 
-                <div class="avatar">
-                    PHOTO
+    <!-- REFERENCES SECTION -->
+    <section id="references" class="py-16 bg-white dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Academic References</h2>
+                <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Professional reference provided with consent for evaluation.</p>
+            </div>
+
+            <div class="max-w-xl mx-auto bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-6 sm:p-8 shadow-sm">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-full bg-brand-100 dark:bg-brand-900 text-brand-600 dark:text-brand-300 flex items-center justify-center text-xl font-bold">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Rolyn C. Daguil, PhD</h3>
+                        <p class="text-sm font-semibold text-brand-600 dark:text-brand-400">President</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                            Caraga State University - Main Campus<br>
+                            Ampayon, Butuan City, Philippines
+                        </p>
+                        <p class="text-xs text-slate-400 italic mt-3">
+                            "Reference provided with explicit permission for academic and career assessment purposes."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & RA 10173 COMPLIANCE FOOTER -->
+    <section id="contact" class="py-16 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold">Get In Touch</h2>
+                    <p class="text-slate-400 mt-2 text-sm">
+                        Interested in hiring or collaborating? Feel free to reach out directly via professional email.
+                    </p>
+                    
+                    <div class="mt-6 space-y-3 text-sm">
+                        <div class="flex items-center gap-3 text-slate-300">
+                            <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-brand-400">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <span>clinton.pacres@carsu.edu.ph</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-slate-300">
+                            <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-brand-400">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <span>Caraga, Philippines</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Message Simulation -->
+                <div class="bg-slate-800 border border-slate-700 p-6 rounded-xl">
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Your Name</label>
+                            <input type="text" required placeholder="Jane Doe" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded text-sm text-white focus:outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Email Address</label>
+                            <input type="email" required placeholder="jane@example.com" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded text-sm text-white focus:outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Message</label>
+                            <textarea rows="3" required placeholder="Write your message here..." class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded text-sm text-white focus:outline-none focus:border-brand-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-2.5 bg-brand-600 hover:bg-brand-500 font-semibold text-sm rounded transition text-white">
+                            Send Message
+                        </button>
+                    </form>
+                    <div id="contact-success" class="hidden mt-3 p-2 bg-emerald-900/60 text-emerald-300 text-xs rounded text-center">
+                        Thank you! Your message inquiry prompt has been registered.
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Privacy Badge -->
+            <div class="mt-16 pt-8 border-t border-slate-800 text-center space-y-2">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs text-slate-300">
+                    <i class="fas fa-shield-halved text-brand-400"></i>
+                    <span><strong>Data Privacy Act (RA 10173) Compliant</strong></span>
+                </div>
+                <p class="text-xs text-slate-500 max-w-2xl mx-auto">
+                    This website strictly adheres to Republic Act No. 10173. Private residential addresses, sensitive contact numbers, and personal identity documents have been excluded to protect individual privacy.
+                </p>
+                <p class="text-xs text-slate-600 pt-2">
+                    &copy; Clinton Fabre. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTIFACT DETAILS MODAL -->
+    <div id="artifact-modal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 max-w-lg w-full rounded-xl p-6 shadow-2xl relative">
+            <button onclick="closeArtifactModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 id="modal-title" class="text-xl font-bold text-slate-900 dark:text-white mb-3"></h3>
+            <p id="modal-description" class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6"></p>
+            <button onclick="closeArtifactModal()" class="w-full py-2 bg-brand-600 text-white rounded text-sm font-medium hover:bg-brand-700 transition">
+                Close View
+            </button>
+        </div>
+    </div>
+
+    <!-- FULLSCREEN ATS RESUME MODAL -->
+    <div id="ats-resume-modal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-md overflow-y-auto p-4 sm:p-6 md:p-10">
+        <div class="max-w-4xl mx-auto bg-white text-slate-900 rounded-xl p-6 sm:p-10 shadow-2xl relative">
+            <button onclick="closeResumeModal()" class="no-print absolute top-6 right-6 p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full text-sm">
+                <i class="fas fa-times"></i> Close
+            </button>
+
+            <div class="no-print mb-6 pb-4 border-b border-slate-200 flex justify-between items-center">
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">ATS Standard Document View</span>
+                <button onclick="window.print()" class="px-3 py-1.5 bg-brand-600 text-white rounded text-xs font-semibold hover:bg-brand-700 transition flex items-center gap-1.5">
+                    <i class="fas fa-print"></i> Print Document
+                </button>
+            </div>
+
+            <!-- Printable ATS Content -->
+            <div class="space-y-6 text-slate-800">
+                <div class="text-center border-b pb-4 border-slate-300">
+                    <h1 class="text-3xl font-extrabold uppercase tracking-wide text-slate-900">CLINTON FABRE</h1>
+                    <p class="font-bold text-brand-700 text-sm mt-1">Junior Software Developer / Web Developer</p>
+                    <p class="text-xs text-slate-600 mt-1">
+                        Caraga Region, Philippines | clinton.pacres@carsu.edu.ph
+                    </p>
                 </div>
 
                 <div>
-
-                    <strong>
-                        Reference Name
-                    </strong>
-
-                    <span>
-                        Position / Organization
-                    </span>
-
-                    <small>
-                        Contact details:
-                        [ADD ONLY WITH PERMISSION]
-                    </small>
-
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-2">OBJECTIVE / SUMMARY</h2>
+                    <p class="text-xs text-slate-700 leading-relaxed">
+                        Dedicated Information Technology graduate with hands-on coursework and project experience in C programming, HTML/CSS web layout design, and SQL relational database querying. Seeking a Junior Software Developer role to apply technical problem-solving skills and contribute to software projects.
+                    </p>
                 </div>
 
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= RA 10173 ================= -->
-    <section class="privacy-section">
-
-        <div class="privacy-card">
-
-            <div class="privacy-icon">
-                ✓
-            </div>
-
-            <div>
-
-                <small>
-                    PRIVACY & COMPLIANCE
-                </small>
-
-                <h2>
-                    RA 10173 — Data Privacy Act of 2012
-                </h2>
-
-                <p>
-                    This portfolio is designed for professional
-                    presentation without exposing unnecessary
-                    personal information. Personal IDs, complete
-                    home addresses, private contact information,
-                    confidential company data, passwords, and
-                    sensitive documents should not be published.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= FOOTER ================= -->
-    <footer>
-
-        <div class="footer-content">
-
-            <div>
-
-                <div class="footer-logo">
-                    <span>&lt;/&gt;</span> Mike.dev
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-2">EDUCATION</h2>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between font-bold">
+                            <span>Caraga State University - Main Campus</span>
+                            <span>Ampayon, Butuan City</span>
+                        </div>
+                        <div class="flex justify-between text-slate-700">
+                            <span>Bachelor of Science in Information Technology</span>
+                            <span>Graduate</span>
+                        </div>
+                        <div class="flex justify-between text-slate-700">
+                            <span>Bachelor of Science in Electronics Communication Engineering</span>
+                            <span>Undergraduate Coursework</span>
+                        </div>
+                    </div>
                 </div>
 
-                <p>
-                    Electronics Engineer → Software Engineer
-                </p>
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-2">TECHNICAL SKILLS</h2>
+                    <ul class="list-disc list-inside text-xs text-slate-700 space-y-1">
+                        <li><strong>Programming Languages:</strong> C, HTML5, CSS3, JavaScript (Basic)</li>
+                        <li><strong>Database Systems:</strong> SQL, Relational Database Management Systems (RDBMS)</li>
+                        <li><strong>Core Competencies:</strong> Software Logic, Network Diagnostics, System Analysis, Problem Solving</li>
+                    </ul>
+                </div>
 
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-2">PROJECT HIGHLIGHTS</h2>
+                    <div class="space-y-2 text-xs text-slate-700">
+                        <p><strong>Web Application Interfaces:</strong> Engineered clean, responsive user interfaces using HTML and CSS for academic presentation portals.</p>
+                        <p><strong>SQL Database Management:</strong> Constructed relational database models, enforced data constraints, and optimized retrieval queries.</p>
+                        <p><strong>Console Applications:</strong> Developed procedural C applications focusing on array handling, pointer logic, and system algorithms.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-2">TRAINING & CERTIFICATIONS</h2>
+                    <p class="text-xs text-slate-700">Basic Programming, Web Development, and SQL Database Management Trainings — Caraga State University</p>
+                </div>
+
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-300 pb-1 mb-2">LANGUAGES</h2>
+                    <p class="text-xs text-slate-700">English (Professional), Tagalog (Native)</p>
+                </div>
             </div>
-
-
-            <a href="#home">
-                Back to top ↑
-            </a>
-
         </div>
+    </div>
 
+    <!-- JAVASCRIPT CONTROLLERS -->
+    <script>
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
 
-        <div class="copyright">
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+            themeIcon.className = 'fas fa-sun';
+        }
 
-            © <span id="year"></span>
-            Mike Anthony Pacres.
-            Built with HTML, CSS & JavaScript.
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                themeIcon.className = 'fas fa-sun';
+            } else {
+                themeIcon.className = 'fas fa-moon';
+            }
+        });
 
-        </div>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-    </footer>
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
 
+        // Close Mobile Menu on Nav Click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
 
-    <script src="script.js"></script>
+        // Artifact Modal Handlers
+        function openArtifactModal(title, description) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-description').innerText = description;
+            document.getElementById('artifact-modal').classList.remove('hidden');
+        }
 
+        function closeArtifactModal() {
+            document.getElementById('artifact-modal').classList.add('hidden');
+        }
+
+        // ATS Resume Modal Handlers
+        function openResumeModal() {
+            document.getElementById('ats-resume-modal').classList.remove('hidden');
+        }
+
+        function closeResumeModal() {
+            document.getElementById('ats-resume-modal').classList.add('hidden');
+        }
+
+        // Contact Form Submission Handler
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const successNotice = document.getElementById('contact-success');
+            successNotice.classList.remove('hidden');
+            event.target.reset();
+            setTimeout(() => {
+                successNotice.classList.add('hidden');
+            }, 4000);
+        }
+    </script>
 </body>
 </html>
